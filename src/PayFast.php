@@ -1,6 +1,6 @@
 <?php
 
-namespace Rashed\AllGateway;
+namespace RaRashed\AllGateway;
 
 class Payfast
 {
@@ -13,10 +13,16 @@ class Payfast
     protected $checkoutUrl;
     protected $merchant_name;
 
-    // Constructor accepts dynamic URLs and other parameters
-    public function __construct($merchant_id = null, $merchant_name = null, $secured_key = null, $tokenApiUrl = null, $redirectUrl = null, $successUrl = null, $failUrl = null, $checkoutUrl = null)
-    {
-        // Set default values if not passed
+    public function __construct(
+        $merchant_id = null,
+        $merchant_name = null,
+        $secured_key = null,
+        $tokenApiUrl = null,
+        $redirectUrl = null,
+        $successUrl = null,
+        $failUrl = null,
+        $checkoutUrl = null
+    ) {
         $this->merchant_id = $merchant_id ?? 'default_merchant_id';
         $this->merchant_name = $merchant_name ?? 'default_merchant_name';
         $this->secured_key = $secured_key ?? 'default_secured_key';
@@ -27,12 +33,15 @@ class Payfast
         $this->checkoutUrl = $checkoutUrl;
     }
 
-    public function processPayment($payment_data)
+    public function processPayment(array $payment_data): array
     {
-        // Decode payer information
+        // Validate required fields
+        if (!isset($payment_data['payer_information'], $payment_data['payment_amount'], $payment_data['attribute_id'], $payment_data['created_at'])) {
+            throw new \InvalidArgumentException('Missing required payment data.');
+        }
+
         $payer = $payment_data['payer_information'];
 
-        // Prepare parameters for token request
         $urlPostParams = sprintf(
             'MERCHANT_ID=%s&SECURED_KEY=%s&TXNAMT=%s&BASKET_ID=%s',
             $this->merchant_id,
@@ -41,7 +50,7 @@ class Payfast
             $payment_data['attribute_id']
         );
 
-        // Make cURL request to get access token
+        // Make cURL request
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $this->tokenApiUrl);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -49,16 +58,24 @@ class Payfast
         curl_setopt($ch, CURLOPT_POSTFIELDS, $urlPostParams);
         curl_setopt($ch, CURLOPT_USERAGENT, 'CURL/PHP PayFast Example');
         $response = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            throw new \Exception('cURL Error: ' . curl_error($ch));
+        }
+
         curl_close($ch);
 
-        // Decode response and get access token
         $payload = json_decode($response, true);
-        $token = isset($payload['ACCESS_TOKEN']) ? $payload['ACCESS_TOKEN'] : '';
+        $token = $payload['ACCESS_TOKEN'] ?? null;
 
-        // Prepare parameters for the payment request
-        $requestParams = [
+        if (empty($token)) {
+            throw new \Exception('Failed to fetch access token from the API.');
+        }
+
+        // Prepare request parameters
+        return [
             'MERCHANT_ID' => $this->merchant_id,
-            'Merchant_Name' => 'Easily',
+            'Merchant_Name' => $this->merchant_name,
             'TOKEN' => $token,
             'PROCCODE' => 00,
             'TXNAMT' => $payment_data['payment_amount'],
@@ -67,12 +84,11 @@ class Payfast
             'SIGNATURE' => bin2hex(random_bytes(6)) . '-' . $payment_data['attribute_id'],
             'VERSION' => 'MERCHANT-CART-0.1',
             'TXNDESC' => 'Payfast Payment',
-            'SUCCESS_URL' => $this->successUrl, // Use dynamic success URL
-            'FAILURE_URL' => $this->failUrl,   // Use dynamic failure URL
+            'SUCCESS_URL' => $this->successUrl,
+            'FAILURE_URL' => $this->failUrl,
             'BASKET_ID' => $payment_data['attribute_id'],
             'ORDER_DATE' => $payment_data['created_at'],
-            'CHECKOUT_URL' => $this->checkoutUrl, // Use dynamic checkout URL
+            'CHECKOUT_URL' => $this->checkoutUrl,
         ];
-        return $requestParams;
     }
 }

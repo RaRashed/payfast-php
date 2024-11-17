@@ -2,48 +2,56 @@
 
 require 'vendor/autoload.php';
 
-use Rashed\AllGateway\PayFast;
+use RaRashed\AllGateway\Payfast;
 
+// Initialize the Payfast class with dynamic parameters
 $payfast = new Payfast(
-    '102', //merchant id
-    'rashed', //merchant name
-    'zWHjBp2AlttNu1sK', //secured key
-    'https://ipguat.apps.net.pk/Ecommerce/api/Transaction/GetAccessToken', // token API URL
-    'https://ipguat.apps.net.pk/Ecommerce/api/Transaction/PostTransaction', // redirect URL
-    "https://webhook.site/2d8d8613-7107-4fa1-8e0b-1aa68a8e19c3", // dynamic success route
-    "https://webhook.site/2d8d8613-7107-4fa1-8e0b-1aa68a8e19c3", // dynamic failure route
-    "https://webhook.site/2d8d8613-7107-4fa1-8e0b-1aa68a8e19c3" // dynamic checkout route
+    '102', // Merchant ID
+    'Rashed', // Merchant Name
+    'zWHjBp2AlttNu1sK', // Secured Key
+    'https://ipguat.apps.net.pk/Ecommerce/api/Transaction/GetAccessToken', // Token API URL
+    'https://ipguat.apps.net.pk/Ecommerce/api/Transaction/PostTransaction', // Redirect URL
+    "https://webhook.site/2d8d8613-7107-4fa1-8e0b-1aa68a8e19c3", // Success URL
+    "https://webhook.site/2d8d8613-7107-4fa1-8e0b-1aa68a8e19c3", // Failure URL
+    "https://webhook.site/2d8d8613-7107-4fa1-8e0b-1aa68a8e19c3"  // Checkout URL
 );
-$payment_data = [
-    'id' => time(),  // Payment ID (you can dynamically generate or fetch it from DB)
-    'payment_amount' => 100.50,  // Payment amount (the total amount for the transaction)
-    'attribute_id' => time(),  // Attribute ID (likely a reference to the basket or order)
+
+// Prepare payment data dynamically
+$paymentData = [
+    'id' => time(), // Payment ID (unique identifier for the transaction)
+    'payment_amount' => 100.50, // Payment amount
+    'attribute_id' => time(), // Attribute ID (order or basket reference)
     'payer_information' => [
-        'name' => 'John Doe',  // Payer's name
-        'phone' => '1234567890',  // Payer's phone number
-        'email' => 'payer@example.com',  // Payer's email address
+        'name' => 'John Doe', // Payer's name
+        'phone' => '1234567890', // Payer's phone number
+        'email' => 'payer@example.com', // Payer's email address
     ],
-    'created_at' => date('Y-m-d H:i:s'),  // Timestamp when the payment data was created (use current time)
+    'created_at' => date('Y-m-d H:i:s'), // Payment creation timestamp
 ];
-$params = $payfast->processPayment($payment_data);
-$redirectUrl = "https://ipguat.apps.net.pk/Ecommerce/api/Transaction/PostTransaction"; //test redirect url
+
+// Process payment and get the parameters
+$params = $payfast->processPayment($paymentData);
+
+// Define the redirect URL
+$redirectUrl = "https://ipguat.apps.net.pk/Ecommerce/api/Transaction/PostTransaction"; // Test redirect URL
+
 ?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>
-        {{ translate('PayFast Payment') }}
-    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayFast Payment</title>
 </head>
 <body>
-    <form action="<?=$redirectUrl?>" method="post" id="PayFast_payment_form" name="from1">
-        <?php foreach ($params as $a => $b): ?>
-            <input type="hidden" name="<?= htmlspecialchars($a) ?>" value="<?= htmlspecialchars($b) ?>">
+    <form action="<?= htmlspecialchars($redirectUrl) ?>" method="post" id="payfast-payment-form">
+        <?php foreach ($params as $key => $value): ?>
+            <input type="hidden" name="<?= htmlspecialchars($key) ?>" value="<?= htmlspecialchars($value) ?>">
         <?php endforeach; ?>
     </form>
     <script>
         // Automatically submit the form when the page is loaded
-        document.from1.submit();
+        document.getElementById('payfast-payment-form').submit();
     </script>
 </body>
 </html>
-

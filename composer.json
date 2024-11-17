@@ -1,14 +1,21 @@
 {
-    "name": "rashed/all-gateway",
-    "description": "all gateway",
+    "name": "rarashed/all-gateway",
+    "description": "A library for handling multiple payment gateways integration",
     "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Rashed\\AllGateway\\": "src/"
+            "RaRashed\\AllGateway\\": "src/"
         }
     },
-    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Rashed",
+            "email": "rnrashedrn@gmail.com"
+        }
+    ],
     "require": {
         "guzzlehttp/guzzle": "^7.9"
-    }
+    },
+    "minimum-stability": "stable"
 }
