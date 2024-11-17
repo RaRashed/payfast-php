@@ -1,0 +1,14 @@
+{
+    "name": "rashed/all-gateway",
+    "description": "all gateway",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Rashed\\AllGateway\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "guzzlehttp/guzzle": "^7.9"
+    }
+}
