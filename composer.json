@@ -1,6 +1,6 @@
 {
     "name": "rarashed/payfast-sdk",
-    "description": "A library for handling multiple payment gateways integration",
+    "description": "A library for handling payfast payment gateway integration",
     "type": "library",
     "license": "MIT",
     "autoload": {
@@ -17,5 +17,6 @@
       "require": {
         "guzzlehttp/guzzle": "^7.0.1"
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

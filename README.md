@@ -12,6 +12,12 @@ You can install the package via Composer:
 composer require rarashed/payfast-sdk
 ```
 
+#OR
+
+```bash
+composer require rarashed/payfast-sdk:dev-main
+```
+
 #Code example
 
 ```bash
