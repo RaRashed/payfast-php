@@ -1,4 +1,4 @@
-# All Gateway Package
+# Payfast Package
 
 The `PayFast` package allows easy integration with payment gateway in one unified API. It is simple to install, configure, and use.
 
