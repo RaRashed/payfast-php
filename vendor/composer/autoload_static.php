@@ -15,7 +15,7 @@ class ComposerStaticInitc219c544ffa5c27a37ef25b346815c3a
     public static $prefixLengthsPsr4 = array (
         'R' => 
         array (
-            'Rashed\\AllGateway\\' => 18,
+            'RaRashed\\PayFastSdk\\' => 20,
         ),
         'P' => 
         array (
@@ -31,14 +31,14 @@ class ComposerStaticInitc219c544ffa5c27a37ef25b346815c3a
     );
 
     public static $prefixDirsPsr4 = array (
-        'Rashed\\AllGateway\\' => 
+        'RaRashed\\PayFastSdk\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (

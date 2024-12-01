@@ -1,8 +1,8 @@
 <?php
 
-namespace RaRashed\AllGateway;
+namespace RaRashed\PayFastSdk;
 
-class Payfast
+class PayFast
 {
     protected $merchant_id;
     protected $secured_key;

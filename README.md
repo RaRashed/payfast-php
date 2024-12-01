@@ -1,6 +1,6 @@
 # All Gateway Package
 
-The `All Gateway` package allows easy integration with multiple payment gateways in one unified API. It is simple to install, configure, and use.
+The `PayFast` package allows easy integration with payment gateway in one unified API. It is simple to install, configure, and use.
 
 ---
 
@@ -9,13 +9,15 @@ The `All Gateway` package allows easy integration with multiple payment gateways
 You can install the package via Composer:
 
 ```bash
-composer require rarashed/all-gateway
+composer require rarashed/payfast-sdk
 ```
-#Code example
-```bash
-use RaRashed\AllGateway\Payfast;
 
-$payfast = new Payfast(
+#Code example
+
+```bash
+use RaRashed\PayFastSdk\PayFast;
+
+$payfast = new PayFast(
     'merchant_id', // Your Merchant ID
     'merchant_name', // Your Merchant Name
     'secured_key', // Your Secured Key
@@ -38,7 +40,9 @@ $payment_data = [
 
 $response = $payfast->processPayment($payment_data);
 ```
+
 #Pay HTML Form Code
+
 ```bash
 $redirectUrl = "https://ipguat.apps.net.pk/Ecommerce/api/Transaction/PostTransaction"; // Test redirect URL
 <!DOCTYPE html>
@@ -63,11 +67,14 @@ $redirectUrl = "https://ipguat.apps.net.pk/Ecommerce/api/Transaction/PostTransac
 ```
 
 #Token and Redirect URL will be country wise. Test Token URL
+
 ```bash
 https://ipguat.apps.net.pk/Ecommerce/api/Transaction/GetAccessToken
 ```
+
 ##Test Redirect URL
 
 ```bash
 https://ipguat.apps.net.pk/Ecommerce/api/Transaction/PostTransaction
 
+```

@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'rashed/all-gateway',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'name' => 'rarashed/payfast-sdk',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'c40821d3830f0999f83bef4b69d876d18517dc99',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -91,10 +91,10 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'rashed/all-gateway' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+        'rarashed/payfast-sdk' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'c40821d3830f0999f83bef4b69d876d18517dc99',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

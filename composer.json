@@ -1,11 +1,11 @@
 {
-    "name": "rarashed/all-gateway",
+    "name": "rarashed/payfast-sdk",
     "description": "A library for handling multiple payment gateways integration",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "RaRashed\\AllGateway\\": "src/"
+            "RaRashed\\PayFastSdk\\": "src/"
         }
     },
     "authors": [
@@ -14,8 +14,5 @@
             "email": "rnrashedrn@gmail.com"
         }
     ],
-    "require": {
-        "guzzlehttp/guzzle": "^7.0.1"
-    },
     "minimum-stability": "stable"
 }

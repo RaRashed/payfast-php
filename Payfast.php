@@ -2,10 +2,10 @@
 
 require 'vendor/autoload.php';
 
-use RaRashed\AllGateway\Payfast;
+use RaRashed\PayFastSdk\PayFast;
 
 // Initialize the Payfast class with dynamic parameters
-$payfast = new Payfast(
+$payfast = new PayFast(
     '102', // Merchant ID
     'Rashed', // Merchant Name
     'zWHjBp2AlttNu1sK', // Secured Key
@@ -38,11 +38,13 @@ $redirectUrl = "https://ipguat.apps.net.pk/Ecommerce/api/Transaction/PostTransac
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PayFast Payment</title>
 </head>
+
 <body>
     <form action="<?= htmlspecialchars($redirectUrl) ?>" method="post" id="payfast-payment-form">
         <?php foreach ($params as $key => $value): ?>
@@ -54,4 +56,5 @@ $redirectUrl = "https://ipguat.apps.net.pk/Ecommerce/api/Transaction/PostTransac
         document.getElementById('payfast-payment-form').submit();
     </script>
 </body>
+
 </html>
