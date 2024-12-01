@@ -14,5 +14,8 @@
             "email": "rnrashedrn@gmail.com"
         }
     ],
+      "require": {
+        "guzzlehttp/guzzle": "^7.0.1"
+    },
     "minimum-stability": "stable"
 }
