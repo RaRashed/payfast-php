@@ -3,7 +3,7 @@
         'name' => 'rarashed/payfast-sdk',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '5c9e97c78efda38792975cfe21c37cbea783e7f1',
+        'reference' => '11bca760a2b4eea310c5476f14b15ff60393bb11',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -94,7 +94,7 @@
         'rarashed/payfast-sdk' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '5c9e97c78efda38792975cfe21c37cbea783e7f1',
+            'reference' => '11bca760a2b4eea310c5476f14b15ff60393bb11',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
